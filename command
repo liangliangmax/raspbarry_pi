@@ -1,0 +1,187 @@
+1.安装完成树莓派之后设置软件源
+
+在/etc/apt/sources.list中添加
+deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+
+在/etc/apt/sources.list.d/raspi.list中添加
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+
+2.添加完成软件源之后更新系统
+sudo apt update
+
+sudo apt upgrade
+
+3.安装文本编辑器
+sudo apt-get install -y gedit
+
+4.安装google拼音输入法
+sudo apt-get install fcitx fcitx-googlepinyin fcitx-module-cloudpinyin fcitx-sunpinyin
+
+然后右击右上角的键盘标志，点击configuration，在input mathod里面添加拼音输入法即可
+
+5.安装nodejs
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
+
+
+或者下载nodejs编译好的包，通过软链接安装
+sudo ln -s /opt/node-v10.16.3-linux-armv7l/bin/npm /usr/local/bin/
+sudo ln -s /opt/node-v10.16.3-linux-armv7l/bin/node /usr/local/bin/
+
+
+npm config set registry https://registry.npm.taobao.org --global
+npm config set disturl https://npm.taobao.org/dist --global
+npm config set electron_mirror=https://npm.taobao.org/mirrors/electron/
+npm config set sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
+npm config set phantomjs_cdnurl=https://npm.taobao.org/mirrors/phantomjs/ 
+
+
+6.安装下载工具aria2
+sudo apt-get install aria2
+
+创建aria2的配置文件
+sudo gedit /etc/aria2/aria2.conf
+
+## 文件保存相关 ##
+# 文件保存目录
+dir=/home/pi/Desktop
+# 启用磁盘缓存, 0为禁用缓存, 需1.16以上版本, 默认:16M
+disk-cache=32M
+# 断点续传
+continue=true
+# 文件预分配方式, 能有效降低磁盘碎片, 默认:prealloc
+# 预分配所需时间: none < falloc ? trunc < prealloc
+# falloc和trunc则需要文件系统和内核支持
+# NTFS建议使用falloc, EXT3/4建议trunc, MAC 下需要注释此项
+#file-allocation=falloc
+
+## 下载连接相关 ##
+# 最大同时下载任务数, 运行时可修改, 默认:5
+#max-concurrent-downloads=5
+# 同一服务器连接数, 添加时可指定, 默认:1
+max-connection-per-server=16
+# 整体下载速度限制, 运行时可修改, 默认:0（不限制）
+#max-overall-download-limit=0
+# 单个任务下载速度限制, 默认:0（不限制）
+#max-download-limit=0
+# 整体上传速度限制, 运行时可修改, 默认:0（不限制）
+#max-overall-upload-limit=0
+# 单个任务上传速度限制, 默认:0（不限制）
+#max-upload-limit=0
+# 禁用IPv6, 默认:false
+disable-ipv6=true
+# 最小文件分片大小, 添加时可指定, 取值范围 1M -1024M , 默认：20M
+# 假定 size=10M , 文件为 20MiB 则使用两个来源下载; 文件为 15MiB 则使用一个来源下载
+min-split-size=10M
+# 单个任务最大线程数, 添加时可指定, 默认:5
+#split=10
+
+## 进度保存相关 ##
+# 从会话文件中读取下载任务
+input-file=/etc/aria2/aria2.session
+# 在Aria2退出时保存错误的、未完成的下载任务到会话文件
+save-session=/etc/aria2/aria2.session
+# 定时保存会话, 0为退出时才保存, 需1.16.1以上版本, 默认:0
+save-session-interval=150
+
+## RPC相关设置 ##
+# 启用RPC, 默认:false
+enable-rpc=true
+# 允许所有来源, 默认:false
+rpc-allow-origin-all=true
+# 允许外部访问, 默认:false
+rpc-listen-all=true
+# RPC端口, 仅当默认端口被占用时修改
+rpc-listen-port=6800
+# 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
+rpc-secret=liang
+
+## BT/PT下载相关 ##
+# 当下载的是一个种子(以.torrent结尾)时, 自动开始BT任务, 默认:true
+#follow-torrent=true
+# 客户端伪装, PT需要
+peer-id-prefix=-TR2770-
+user-agent=Transmission/2.77
+# 强制保存会话, 即使任务已经完成, 默认:false
+# 较新的版本开启后会在任务完成后依然保留.aria2文件
+#force-save=false
+# 继续之前的BT任务时, 无需再次校验, 默认:false
+bt-seed-unverified=true
+# 保存磁力链接元数据为种子文件(.torrent文件), 默认:false
+bt-save-metadata=true
+
+创建一个aria2.session的空文件
+sudo gedit /etc/aria2/aria2.session
+
+
+运行 sudo aria2c --conf-path=/etc/aria2/aria2.conf
+
+然后安装web-ui
+sudo apt-get install git
+
+然后找个目录下载页面源码 git clone https://github.com/ziahamza/webui-aria2.git /opt/webui
+
+下载完成之后里面是用nodejs写的项目，直接执行 node node-server.js即可启动页面，然后访问localhost:8888端口即可
+
+7.树莓派安装vs code
+sudo apt-get install libx11-dev
+
+#移除cmdtest
+sudo apt remove cmdtest
+sudo apt remove yarn
+ 
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+ 
+sudo apt update
+sudo apt install yarn
+
+
+git clone https://github.com/microsoft/vscode
+cd vscode
+
+然后执行yarn watch 会提示缺少模块，然后用sudo npm install 模块名称安装缺少模块
+sudo npm install gulp-bom --unsafe-perm
+
+然后提示缺少xkbfile
+sudo apt-get install libxkbfile-dev
+
+然后提示缺少libsecret-1
+sudo apt-get install libsecret-1-dev
+
+
+
+
+./scripts/npm.sh install --arch=armhf
+
+Then, run your instance with ./scripts/code.sh from that same folder.
+
+
+8.安装docker
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+sudo apt-key fingerprint 0EBFCD88
+
+sudo apt-get install docker.io
+
+
+
+
+
+x.用树莓派做 RTMP 流直播服务器
+
+
+
+
+
+
+
+
