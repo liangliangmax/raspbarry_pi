@@ -124,7 +124,7 @@ sudo apt-get install git
 
 下载完成之后里面是用nodejs写的项目，直接执行 node node-server.js即可启动页面，然后访问localhost:8888端口即可
 
-7.树莓派安装vs code
+7.树莓派安装 vs code
 sudo apt-get install libx11-dev
 
 #移除cmdtest
@@ -150,12 +150,17 @@ sudo apt-get install libxkbfile-dev
 然后提示缺少libsecret-1
 sudo apt-get install libsecret-1-dev
 
-
-
-
 ./scripts/npm.sh install --arch=armhf
 
-Then, run your instance with ./scripts/code.sh from that same folder.
+等待安装完成，会有很长时间，可能会卡住
+
+完成之后执行
+./scripts/code.sh
+
+执行过程中会调用electron下载东西，基本是下载不完的
+去到https://npm.taobao.org/mirrors/electron，选择对应的版本，下载需要的内容，
+放到/tmp/gulp-electron-cache/atom/electron/文件夹下
+
 
 
 8.安装docker
@@ -177,6 +182,8 @@ sudo apt-get install docker.io
 
 
 x.用树莓派做 RTMP 流直播服务器
+
+
 
 
 
