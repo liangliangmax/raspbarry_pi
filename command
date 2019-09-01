@@ -161,6 +161,8 @@ sudo apt-get install libsecret-1-dev
 去到https://npm.taobao.org/mirrors/electron，选择对应的版本，下载需要的内容，
 放到/tmp/gulp-electron-cache/atom/electron/文件夹下
 
+或者直接运行
+sudo apt-get install code-oss
 
 
 8.安装docker
@@ -182,6 +184,11 @@ sudo apt-get install docker.io
 
 
 x.用树莓派做 RTMP 流直播服务器
+
+
+
+
+
 
 
 
