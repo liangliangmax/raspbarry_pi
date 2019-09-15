@@ -185,6 +185,9 @@ sudo apt-get install docker.io
 gpg --keyserver keyserver.ubuntu.com --recv-keys 8B48AD6246925553
 gpg -a --export 8B48AD6246925553 | sudo apt-key add -
 
+10.安装vs-code
+https://code.headmelted.com/#linux-install-scripts
+
 
 x.用树莓派做 RTMP 流直播服务器
 
