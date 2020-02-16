@@ -17,6 +17,11 @@ xubuntu:
 
 sources.list:
 
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup
+
+vi /etc/apt/sources.list
+
+####
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports bionic main restricted
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports bionic main restricted
 
