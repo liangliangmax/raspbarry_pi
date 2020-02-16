@@ -3,3 +3,10 @@ mongodb:
     ② mv node-v6.10.0-linux-x64  nodejs 
     ① ln -s /app/software/nodejs/bin/npm /usr/local/bin/ 
     ② ln -s /app/software/nodejs/bin/node /usr/local/bin/
+
+
+vs code:
+   https://packagecloud.io/headmelted/codebuilds
+   wget --content-disposition https://packagecloud.io/headmelted/codebuilds/packages/debian/stretch/code-oss_1.32.0-1550644676_arm64.deb/download.deb   
+   sudo dpkg -i code-oss_1.32.0-1550644676_arm64.deb
+   
