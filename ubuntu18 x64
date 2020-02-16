@@ -11,7 +11,9 @@ wifi:
             access-points:
                 "wlan-name":
                     password: "password here"
-
+                    
+xubuntu:                    
+    sudo apt install xubuntu-desktop
 
 mongodb:
     ① tar -xvf   node-v6.10.0-linux-x64.tar.xz   
