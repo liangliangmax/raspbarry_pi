@@ -49,7 +49,7 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports bionic-security multiverse
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports bionic-security multiverse
 
 
-mongodb:
+node:
     ① tar -xvf   node-v6.10.0-linux-x64.tar.xz   
     ② mv node-v6.10.0-linux-x64  nodejs 
     ① ln -s /app/software/nodejs/bin/npm /usr/local/bin/ 
