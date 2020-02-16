@@ -1,3 +1,18 @@
+wifi:
+    配置网络， 在 /etc/netplay/*.yaml 文件中增加WIFI配置
+    network:
+    ethernets:
+        eth0:
+            dhcp4: true
+    version: 2    # 以上是原有的,下面的是新增
+    wifis:
+        wlan0:
+            dhcp4: true
+            access-points:
+                "wlan-name":
+                    password: "password here"
+
+
 mongodb:
     ① tar -xvf   node-v6.10.0-linux-x64.tar.xz   
     ② mv node-v6.10.0-linux-x64  nodejs 
@@ -10,3 +25,4 @@ vs code:
    wget --content-disposition https://packagecloud.io/headmelted/codebuilds/packages/debian/stretch/code-oss_1.32.0-1550644676_arm64.deb/download.deb   
    sudo dpkg -i code-oss_1.32.0-1550644676_arm64.deb
    
+
